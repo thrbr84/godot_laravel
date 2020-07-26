@@ -26,6 +26,32 @@
         - php artisan serve
         - Access: http://127.0.0.1:8000
 
+# Config local Apache
+- ```sudo nano /etc/hosts```
+    ```bash
+    # add this line
+    127.0.0.1   godotlaravel.local
+    ```
+- ```cd /etc/apache2/sites-available```
+- ```sudo nano api-godotlaravel.conf```
+    ```bash
+    <VirtualHost *:80>
+        ServerName godotlaravel.local
+        ServerAlias godotlaravel.local
+
+        ServerAdmin webmaster@localhost
+        DocumentRoot "/home/SEU_USUARIO/Godot_Laravel/laravel/public"
+
+        <Directory "/home/SEU_USUARIO/Godot_Laravel/laravel/public">
+                AllowOverride all
+                Require all granted
+        </Directory>
+    </VirtualHost>
+    ```
+- ```sudo a2ensite api-godotlaravel.conf```
+- ```sudo systemctl restart apache2```
+- Test: ```http://godotlaravel.local```
+
 # Deploy production server
 - Edit ```.env``` file
     ```bash

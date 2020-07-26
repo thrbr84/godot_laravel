@@ -1,0 +1,127 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://scripts/loader.gd" type="Script" id=1]
+[ext_resource path="res://assets/fonts/gill-sans.otf" type="DynamicFontData" id=2]
+[ext_resource path="res://assets/load.png" type="Texture" id=3]
+[ext_resource path="res://assets/square.png" type="Texture" id=4]
+
+[sub_resource type="Animation" id=1]
+resource_name = "load"
+length = 2.1
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2, 2.1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 22 ]
+}
+
+[sub_resource type="DynamicFont" id=2]
+size = 50
+use_filter = true
+font_data = ExtResource( 2 )
+
+[sub_resource type="Animation" id=3]
+resource_name = "start"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("CenterContainer:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("CenterContainer/ColorRect:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[node name="loader" type="CanvasLayer"]
+script = ExtResource( 1 )
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+modulate = Color( 1, 1, 1, 0 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 6.10352e-05
+mouse_filter = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="CenterContainer"]
+margin_right = 720.0
+margin_bottom = 1280.0
+rect_min_size = Vector2( 720, 1280 )
+mouse_filter = 1
+color = Color( 1, 1, 1, 0 )
+
+[node name="Control" type="Control" parent="CenterContainer"]
+margin_left = 110.0
+margin_top = 540.0
+margin_right = 610.0
+margin_bottom = 740.0
+rect_min_size = Vector2( 500, 200 )
+mouse_filter = 1
+
+[node name="Sprite" type="Sprite" parent="CenterContainer/Control"]
+position = Vector2( 239, 150 )
+scale = Vector2( 1.28955, 1.28955 )
+texture = ExtResource( 3 )
+hframes = 23
+
+[node name="anim" type="AnimationPlayer" parent="CenterContainer/Control/Sprite"]
+autoplay = "load"
+playback_speed = 1.5
+anims/load = SubResource( 1 )
+
+[node name="Label" type="Label" parent="CenterContainer/Control"]
+anchor_right = 1.0
+margin_bottom = 57.0
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0, 0, 0, 0.647059 )
+text = "Por favor, aguarde..."
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="progress" type="TextureProgress" parent="CenterContainer/Control"]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -250.0
+margin_top = -22.0
+margin_right = 250.0
+margin_bottom = -10.0
+texture_progress = ExtResource( 4 )
+tint_progress = Color( 0, 0, 0, 0.313726 )
+nine_patch_stretch = true
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": ""
+}
+
+[node name="anim" type="AnimationPlayer" parent="."]
+anims/start = SubResource( 3 )

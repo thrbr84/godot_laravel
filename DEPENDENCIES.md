@@ -3,10 +3,10 @@
 - Ubuntu 18.04 LTS
 - PHP ^7.2.5
 - MySQL ^5.7
+- Apache2
 - Composer
 - NodeJs
 - NPM
-
 
 # How to install PHP ^7.2.5
 - apt-get update && apt-get upgrade
@@ -21,6 +21,12 @@
 - sudo apt update
 - sudo apt install mysql-server
 - sudo mysql_secure_installation
+
+# How to install Apache2
+- sudo apt-get update
+- sudo apt-get install apache2
+- sudo systemctl start apache2.service
+- test: http://localhost
 
 # How to install Composer
 - sudo apt update

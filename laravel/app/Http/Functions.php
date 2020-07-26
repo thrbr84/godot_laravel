@@ -107,7 +107,7 @@ class Functions {
     {
 
          // Force Carbon local
-         $localeCarbon = "pt_BR";
+         $localeCarbon = "en";
 
          // Language
          $locale = $request->header('Language');
@@ -115,7 +115,7 @@ class Functions {
          // Default settings
          if (empty($locale))
          {
-             $locale = 'pt_BR';
+             $locale = 'en';
              $localeCarbon = $locale;
          }
 

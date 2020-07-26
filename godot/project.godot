@@ -16,15 +16,23 @@ _global_script_class_icons={
 [application]
 
 config/name="GodotLaravel"
-run/main_scene="res://scenes/main.tscn"
+run/main_scene="res://scenes/lobby.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+Game="*res://scripts/game.gd"
+HttpLayer="*res://scenes/httpLayer.tscn"
+Message="*res://scenes/message.tscn"
+Alert="*res://scenes/alert.tscn"
+Loader="*res://scenes/loader.tscn"
 
 [display]
 
 window/size/width=720
 window/size/height=1280
-window/size/test_width=640
-window/size/test_height=360
+window/size/test_width=360
+window/size/test_height=640
 window/handheld/orientation="sensor_portrait"
 window/stretch/mode="2d"
 window/stretch/aspect="keep"

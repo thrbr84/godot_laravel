@@ -149,7 +149,11 @@ class RegisterController extends BaseController
         $id = $user->id;
         $nomeCompleto = $user->full_name;
 
-        $randomCode = Session::getId();
+
+        $faker = \Faker\Factory::create();
+        $pinRule = '[@$*:ABCDEFGHJKMNPQRSTUVWXZYabcdeghkmnpqsuvwxyz2-9]{6}';
+        $randomCode = $faker->regexify($pinRule);
+
         $passwordExpires = Carbon::now()->addMinutes(10);
         $passwordExpires->tz('UTC');
 
@@ -205,7 +209,7 @@ class RegisterController extends BaseController
         $user = User::where("passwordNew", $code)->first();
 
         if (empty($user)){
-            return $this->sendError($request, [], "user_not_found", __("User not found!"));
+            return $this->sendError($request, [], "code_not_found", __("Code not found!"));
 
         }else{
             $passExpired = Carbon::now()->greaterThan(Carbon::createFromFormat("Y-m-d H:i:s",$user->passwordExpires));

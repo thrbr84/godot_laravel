@@ -1,0 +1,72 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://assets/fonts/gill-sans.otf" type="DynamicFontData" id=1]
+[ext_resource path="res://assets/close_icon.png" type="Texture" id=2]
+[ext_resource path="res://scripts/input.gd" type="Script" id=3]
+
+[sub_resource type="StyleBoxFlat" id=1]
+content_margin_left = 15.0
+content_margin_right = 15.0
+bg_color = Color( 0.937255, 0.937255, 0.937255, 1 )
+
+[sub_resource type="StyleBoxFlat" id=2]
+content_margin_left = 15.0
+content_margin_right = 15.0
+content_margin_top = 15.0
+content_margin_bottom = 15.0
+bg_color = Color( 1, 1, 1, 0.160784 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 40
+use_filter = true
+extra_spacing_char = 2
+font_data = ExtResource( 1 )
+
+[sub_resource type="Animation" id=4]
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("line:rect_size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 8 ), Vector2( 620, 8 ) ]
+}
+
+[node name="input" type="LineEdit" groups=[
+"inputs",
+]]
+margin_right = 620.0
+margin_bottom = 76.0
+custom_icons/clear = ExtResource( 2 )
+custom_styles/focus = SubResource( 1 )
+custom_styles/normal = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
+custom_colors/selection_color = Color( 0.839216, 0.498039, 0.729412, 0.52549 )
+custom_colors/cursor_color = Color( 0, 0, 0, 1 )
+custom_colors/clear_button_color_pressed = Color( 0, 0, 0, 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+context_menu_enabled = false
+clear_button_enabled = true
+placeholder_text = "E-mail..."
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="line" type="ColorRect" parent="."]
+margin_top = 76.0
+margin_bottom = 84.0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/line = SubResource( 4 )
+[connection signal="focus_entered" from="." to="." method="_on_input_focus_entered"]
+[connection signal="focus_exited" from="." to="." method="_on_input_focus_exited"]

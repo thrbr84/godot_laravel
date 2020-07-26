@@ -1,3 +1,303 @@
-[gd_scene format=2]
+[gd_scene load_steps=10 format=2]
 
-[node name="main" type="Node2D"]
+[ext_resource path="res://scripts/main.gd" type="Script" id=1]
+[ext_resource path="res://assets/fonts/gill-sans.otf" type="DynamicFontData" id=2]
+[ext_resource path="res://assets/icon_logout.png" type="Texture" id=3]
+[ext_resource path="res://assets/square.png" type="Texture" id=4]
+[ext_resource path="res://assets/icon_plus.png" type="Texture" id=5]
+[ext_resource path="res://assets/save.png" type="Texture" id=6]
+
+[sub_resource type="DynamicFont" id=1]
+size = 60
+use_filter = true
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 50
+use_filter = true
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 40
+use_filter = true
+font_data = ExtResource( 2 )
+
+[node name="main" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+anchor_right = 1.0
+margin_top = 30.0
+margin_right = 720.0
+margin_bottom = 126.0
+rect_min_size = Vector2( 720, 96 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Level" type="Control" parent="HBoxContainer"]
+margin_right = 292.0
+margin_bottom = 96.0
+rect_min_size = Vector2( 292, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="HBoxContainer/Level"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_constants/shadow_offset_x = 2
+custom_constants/shadow_offset_y = 2
+text = "Level"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": ""
+}
+
+[node name="Points" type="Control" parent="HBoxContainer"]
+margin_left = 296.0
+margin_right = 588.0
+margin_bottom = 96.0
+rect_min_size = Vector2( 292, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="HBoxContainer/Points"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_constants/shadow_offset_x = 2
+custom_constants/shadow_offset_y = 2
+text = "Points"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": ""
+}
+
+[node name="Control" type="Control" parent="HBoxContainer"]
+margin_left = 592.0
+margin_right = 692.0
+margin_bottom = 96.0
+rect_min_size = Vector2( 100, 0 )
+
+[node name="btnLogoff" type="TouchScreenButton" parent="HBoxContainer/Control"]
+position = Vector2( 25, 5 )
+scale = Vector2( 0.94189, 0.94189 )
+normal = ExtResource( 3 )
+
+[node name="ControlActions" type="VBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -360.0
+margin_top = -427.0
+margin_right = 360.0
+margin_bottom = 403.0
+rect_min_size = Vector2( 0, 150 )
+custom_constants/separation = 50
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="btnIncreaseLevel" type="Control" parent="ControlActions"]
+margin_top = 20.0
+margin_right = 720.0
+margin_bottom = 180.0
+rect_min_size = Vector2( 720, 160 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="touch" type="TouchScreenButton" parent="ControlActions/btnIncreaseLevel"]
+modulate = Color( 0.0431373, 0.145098, 0.321569, 1 )
+position = Vector2( 125, 0 )
+scale = Vector2( 47.3545, 16.4051 )
+normal = ExtResource( 4 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="Label" type="Label" parent="ControlActions/btnIncreaseLevel"]
+margin_left = 269.0
+margin_top = 6.0
+margin_right = 569.0
+margin_bottom = 157.0
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0.65098, 0.65098, 0.65098, 1 )
+text = "LEVEL"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": ""
+}
+
+[node name="icon_plus" type="Sprite" parent="ControlActions/btnIncreaseLevel"]
+modulate = Color( 1, 1, 1, 0.364706 )
+position = Vector2( 200.067, 75.1992 )
+scale = Vector2( 0.78, 0.78 )
+texture = ExtResource( 5 )
+
+[node name="btnIncreasePoints" type="Control" parent="ControlActions"]
+margin_top = 230.0
+margin_right = 720.0
+margin_bottom = 390.0
+rect_min_size = Vector2( 720, 160 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="touch" type="TouchScreenButton" parent="ControlActions/btnIncreasePoints"]
+modulate = Color( 0.0431373, 0.321569, 0.0941176, 1 )
+position = Vector2( 125, 0 )
+scale = Vector2( 47.3545, 16.4051 )
+normal = ExtResource( 4 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="Label" type="Label" parent="ControlActions/btnIncreasePoints"]
+margin_left = 269.0
+margin_top = 6.0
+margin_right = 569.0
+margin_bottom = 157.0
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0.65098, 0.65098, 0.65098, 1 )
+text = "POINTS"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": ""
+}
+
+[node name="icon_plus2" type="Sprite" parent="ControlActions/btnIncreasePoints"]
+modulate = Color( 1, 1, 1, 0.364706 )
+position = Vector2( 200.067, 79 )
+scale = Vector2( 0.78, 0.78 )
+texture = ExtResource( 5 )
+
+[node name="btnResetGame" type="Control" parent="ControlActions"]
+margin_top = 440.0
+margin_right = 720.0
+margin_bottom = 600.0
+rect_min_size = Vector2( 720, 160 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="touch" type="TouchScreenButton" parent="ControlActions/btnResetGame"]
+modulate = Color( 0.4, 0.392157, 0.0509804, 1 )
+position = Vector2( 125, 0 )
+scale = Vector2( 47.3545, 16.4051 )
+normal = ExtResource( 4 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="Label" type="Label" parent="ControlActions/btnResetGame"]
+margin_left = 125.0
+margin_right = 589.0
+margin_bottom = 151.0
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0.65098, 0.65098, 0.65098, 1 )
+text = "Reset Game"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": ""
+}
+
+[node name="btnDeleteAccount" type="Control" parent="ControlActions"]
+margin_top = 650.0
+margin_right = 720.0
+margin_bottom = 810.0
+rect_min_size = Vector2( 720, 160 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="touch" type="TouchScreenButton" parent="ControlActions/btnDeleteAccount"]
+modulate = Color( 0.458824, 0.0313726, 0, 1 )
+position = Vector2( 125, 0 )
+scale = Vector2( 47.3545, 16.4051 )
+normal = ExtResource( 4 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="Label" type="Label" parent="ControlActions/btnDeleteAccount"]
+margin_left = 125.0
+margin_right = 589.0
+margin_bottom = 151.0
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0.65098, 0.65098, 0.65098, 1 )
+text = "Delete Account"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": ""
+}
+
+[node name="ControlButtons" type="HBoxContainer" parent="."]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -150.0
+rect_min_size = Vector2( 0, 150 )
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="btnSave" type="Control" parent="ControlButtons"]
+margin_left = 225.0
+margin_right = 495.0
+margin_bottom = 150.0
+rect_min_size = Vector2( 270, 96 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="touch" type="TouchScreenButton" parent="ControlButtons/btnSave"]
+modulate = Color( 0.152941, 0.152941, 0.152941, 1 )
+scale = Vector2( 26.6857, 9.27795 )
+normal = ExtResource( 4 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="Label" type="Label" parent="ControlButtons/btnSave"]
+margin_left = 96.0
+margin_right = 257.0
+margin_bottom = 94.0
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 0.65098, 0.65098, 0.65098, 1 )
+text = "Save"
+valign = 1
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": ""
+}
+
+[node name="save" type="Sprite" parent="ControlButtons/btnSave"]
+modulate = Color( 1, 1, 1, 0.215686 )
+position = Vector2( 48.067, 45.3384 )
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 6 )
+[connection signal="pressed" from="HBoxContainer/Control/btnLogoff" to="." method="_on_btnLogoff_pressed"]
+[connection signal="pressed" from="ControlButtons/btnSave/touch" to="." method="_on_saveGame_pressed"]
