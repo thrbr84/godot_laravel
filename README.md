@@ -2,7 +2,7 @@
 
 - [Dependencies](DEPENDENCIES.md)
 
-# Explanation
+# Explanation (PT_BR)
 - [My Youtube channel](https://youtu.be/eSmhLndmim4)
 
 
