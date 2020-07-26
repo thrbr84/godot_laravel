@@ -17,12 +17,12 @@
     - php artisan migrate
     - php artisan passport:install
 
+    ## Optimize
+    - php artisan optimize:clear
+
     ## local serve
         - php artisan serve
         - Access: http://127.0.0.1:8000
-    
-    ## Optimize
-    - php artisan optimize:clear
 
 # Deploy production server
 - Edit ```.env``` file
