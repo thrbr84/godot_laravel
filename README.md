@@ -6,14 +6,15 @@
 - [My Youtube channel](https://youtube.com.br/thiagobruno)
 
 # Setting
-- Copy all files in ```\laravel``` folder to your local directory
-- Execute these steps in terminal/command inside local ```\laravel``` folder:
+- Clone this repository
+- cd godot_laravel/laravel
+- Execute:
     - composer install
     - chmod -R 0777 storage
     - chmod -R 0777 bootstrap/cache
+    - cp .env.model .env
     - php artisan key:generate
     - create mysql database ```godot_laravel```
-    - copy .env.model .env
     - config the ```.env``` file with your parameters
     - php artisan migrate
     - php artisan passport:install
