@@ -3,7 +3,11 @@
 - [Dependencies](DEPENDENCIES.md)
 
 # Explanation
-- [My Youtube channel](https://youtube.com.br/thiagobruno)
+- [My Youtube channel](https://youtu.be/eSmhLndmim4)
+
+
+[![Video explanation](https://img.youtube.com/vi/eSmhLndmim4/0.jpg)](https://www.youtube.com/watch?v=eSmhLndmim4)
+
 
 # Setting
 - Clone this repository
