@@ -40,7 +40,7 @@ func _on_HTTPRequest_request_completed(result, response_code, headers, body, rou
 			Game.saving = false
 			Game.modified = false
 			Loader.close()
-			Alert._show("Save sucessfull!", "onSaveSucessfull", null, null, { "btnConfirm" : "OK" })
+			Alert._show("Save successful!", "onSaveSucessfull", null, null, { "btnConfirm" : "OK" })
 			return
 			
 		if res.status == "success" && route == "forgot_password":
