@@ -24,7 +24,7 @@
 
     ## local serve
         - php artisan serve
-        - Access: http://127.0.0.1:8000
+        - Access: [http://127.0.0.1:8000](http://127.0.0.1:8000)
 
 # Config local Apache
 - ```sudo nano /etc/hosts```
