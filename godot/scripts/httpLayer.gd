@@ -28,40 +28,35 @@ func _on_HTTPRequest_request_completed(result, response_code, headers, body, rou
 			Message._show(msg)
 			return
 		
-		if res.status == "success" && route == "logout":
-			var _changeScene = get_tree().change_scene_to(load("res://scenes/login.tscn"))
-			return
+		if res.status == "success":
+			if route == "logout":
+				var _changeScene = get_tree().change_scene_to(load("res://scenes/login.tscn"))
+				return
+				
+			if route == "remove_account":
+				var _changeScene = get_tree().change_scene_to(load("res://scenes/login.tscn"))
+				return
 			
-		if res.status == "success" && route == "remove_account":
-			var _changeScene = get_tree().change_scene_to(load("res://scenes/login.tscn"))
-			return
-
-		if res.status == "success" && route == "save_data":
-			Game.saving = false
-			Game.modified = false
-			Loader.close()
-			Alert._show("Save successful!", "onSaveSucessfull", null, null, { "btnConfirm" : "OK" })
-			return
+			if route == "save_data":
+				Game.saving = false
+				Game.modified = false
+				Loader.close()
+				Alert._show("Save successful!", "onSaveSucessfull", null, null, { "btnConfirm" : "OK" })
+				return
+				
+			if route == "forgot_password":
+				Message._show(res.message)
+				return
 			
-		if res.status == "success" && route == "forgot_password":
-			Message._show(res.message)
-			return
-		
-		if res.status == "success" && route == "reset_password":
-			Message._show(res.message)
-			return
-		
-		if res.status == "success" && route == "login":
-			# get token
-			Game.user_token = res['data']['token']
-			Game.user_data = res['data']['user']
-			Game.save_data = Game.user_data['save_data']
-
-		if res.status == "success" && route == "register":
-			# get token
-			Game.user_token = res['data']['token']
-			Game.user_data = res['data']['user']
-			Game.save_data = Game.user_data['save_data']
+			if route == "reset_password":
+				Message._show(res.message)
+				return
+			
+			if route == "login" || route == "register":
+				# get token
+				Game.user_token = res['data']['token']
+				Game.user_data = res['data']['user']
+				Game.save_data = Game.user_data['save_data']
 			
 	if redirectTo != null && redirectTo != "no":
 		var _changeScene = get_tree().change_scene_to(load(redirectTo))
@@ -107,7 +102,7 @@ func _register(_credentials, _redirectTo):
 	if http_error != OK:
 		Loader.prog = null
 		Loader.close()
-		
+
 func _forgotPassword(_forgotData):
 	var http = HTTPRequest.new()
 	http.use_threads = use_threads
@@ -124,7 +119,6 @@ func _forgotPassword(_forgotData):
 	if http_error != OK:
 		Loader.prog = null
 		Loader.close()
-
 
 func _resetPassword(_resetData, _redirectTo = null):
 	var http = HTTPRequest.new()
@@ -143,7 +137,6 @@ func _resetPassword(_resetData, _redirectTo = null):
 		Loader.prog = null
 		Loader.close()
 
-
 func _me(_redirectTo = null):
 	var http = HTTPRequest.new()
 	http.use_threads = use_threads
@@ -161,7 +154,6 @@ func _me(_redirectTo = null):
 	if http_error != OK:
 		Loader.prog = null
 		Loader.close()
-
 
 func _logoff(simple = false):
 	if !simple:
@@ -209,7 +201,6 @@ func _saveGame():
 	if http_error != OK:
 		Loader.prog = null
 		Loader.close()
-		
 
 func _removeAccount():
 	var http = HTTPRequest.new()
