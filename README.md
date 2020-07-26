@@ -50,7 +50,7 @@
     ```
 - ```sudo a2ensite api-godotlaravel.conf```
 - ```sudo systemctl restart apache2```
-- Test: ```http://godotlaravel.local```
+- Test: [http://godotlaravel.local](http://godotlaravel.local)
 
 # Deploy production server
 - Edit ```.env``` file
