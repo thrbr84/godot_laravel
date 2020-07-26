@@ -1,4 +1,7 @@
 <?php
+/**
+ * @author  Thiago Bruno <thiago.bruno@birdy.studio>
+ */
 
 namespace App\Http;
 
@@ -98,5 +101,26 @@ class Functions {
     public function getHeaderPerPage($request, $numDefault = 15)
     {
         return empty($request->header('perPage')) ? $numDefault : (int)$request->header('perPage');
+    }
+
+    public function checkHeaderLanguage($request)
+    {
+
+         // Force Carbon local
+         $localeCarbon = "pt_BR";
+
+         // Language
+         $locale = $request->header('Language');
+
+         // Default settings
+         if (empty($locale))
+         {
+             $locale = 'pt_BR';
+             $localeCarbon = $locale;
+         }
+
+         // Apply language
+         Carbon::setLocale($localeCarbon);
+         App::setLocale($locale);
     }
 }

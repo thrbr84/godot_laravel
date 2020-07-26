@@ -1,14 +1,11 @@
 <?php
+/**
+ * @author  Thiago Bruno <thiago.bruno@birdy.studio>
+ */
 
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-/**
- * Class UserSave
- *
- *
- * @author  Thiago Bruno <thiago.bruno@birdy.studio>
- */
 class UserSave extends Model
 {
     protected $table = "user_save";

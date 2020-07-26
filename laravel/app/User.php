@@ -1,4 +1,7 @@
 <?php
+/**
+ * @author  Thiago Bruno <thiago.bruno@birdy.studio>
+ */
 
 namespace App;
 
@@ -7,12 +10,6 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
 
-/**
- * Class User
- *
- *
- * @author  Thiago Bruno <thiago.bruno@birdy.studio>
- */
 class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, Notifiable;

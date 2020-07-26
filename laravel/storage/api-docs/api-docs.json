@@ -2,7 +2,7 @@
     "openapi": "3.0.0",
     "info": {
         "title": "Godot + Laravel",
-        "description": "API Rest de exemplo para ser utilizada com Godot Engine (https://godotengine.org)",
+        "description": "Sample Rest API for use with Godot Engine (https://godotengine.org)",
         "contact": {
             "email": "thiago.bruno@birdy.studio"
         },
@@ -18,8 +18,8 @@
                 "tags": [
                     "User"
                 ],
-                "summary": "Insere um usuário",
-                "description": "Insere um usuário na API",
+                "summary": "Register a user",
+                "description": "Register a new user",
                 "operationId": "App\\Http\\Controllers\\API\\RegisterController::register",
                 "requestBody": {
                     "content": {
@@ -52,7 +52,7 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "Usuário criado com sucesso!",
+                        "description": "",
                         "content": {
                             "application/json": {
                                 "schema": {}
@@ -67,8 +67,8 @@
                 "tags": [
                     "User"
                 ],
-                "summary": "Autentica um usuário",
-                "description": "Autentica um usuário, e retorna os dados de cadastro",
+                "summary": "Authenticate a user",
+                "description": "Authenticates a user, and returns the registration data",
                 "operationId": "App\\Http\\Controllers\\API\\RegisterController::login",
                 "requestBody": {
                     "content": {
@@ -92,7 +92,7 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "Usuário autenticado com sucesso!",
+                        "description": "",
                         "content": {
                             "application/json": {
                                 "schema": {}
@@ -107,8 +107,8 @@
                 "tags": [
                     "User"
                 ],
-                "summary": "Esqueci senha",
-                "description": "Envia um código para o usuário conseguir criar nova senha",
+                "summary": "Forgot the password",
+                "description": "Send a code for the user to be able to create a new password",
                 "operationId": "App\\Http\\Controllers\\API\\RegisterController::forgotPassword",
                 "requestBody": {
                     "content": {
@@ -126,7 +126,7 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "Código enviado por email",
+                        "description": "",
                         "content": {
                             "application/json": {
                                 "schema": {}
@@ -141,8 +141,8 @@
                 "tags": [
                     "User"
                 ],
-                "summary": "Criar nova senha",
-                "description": "Cria uma nova senha com código informado anteriormente",
+                "summary": "Create new password",
+                "description": "Creates a new password with previously entered code",
                 "operationId": "App\\Http\\Controllers\\API\\RegisterController::resetPassword",
                 "requestBody": {
                     "content": {
@@ -166,7 +166,7 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "Código enviado por email",
+                        "description": "",
                         "content": {
                             "application/json": {
                                 "schema": {}
@@ -181,12 +181,12 @@
                 "tags": [
                     "User"
                 ],
-                "summary": "Retorna o usuário autenticado",
-                "description": "Retorna um usuário",
+                "summary": "Returns a user",
+                "description": "Returns the authenticated user",
                 "operationId": "App\\Http\\Controllers\\API\\UserController::index",
                 "responses": {
                     "200": {
-                        "description": "Listando o usuário",
+                        "description": "",
                         "content": {
                             "application/json": {
                                 "schema": {}
@@ -204,8 +204,8 @@
                 "tags": [
                     "User"
                 ],
-                "summary": "Save do usuário",
-                "description": "Grava os dados de save do usuário",
+                "summary": "User Save",
+                "description": "Saves the user's save data",
                 "operationId": "App\\Http\\Controllers\\API\\UserController::update",
                 "requestBody": {
                     "content": {
@@ -223,7 +223,7 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "Usuário salvo com sucesso",
+                        "description": "",
                         "content": {
                             "application/json": {
                                 "schema": {}
@@ -241,12 +241,12 @@
                 "tags": [
                     "User"
                 ],
-                "summary": "Remove a conta do usuário",
-                "description": "Exclui o usuário e o save de forma permanente",
+                "summary": "Removes user account",
+                "description": "Permanently deletes the user and save",
                 "operationId": "App\\Http\\Controllers\\API\\UserController::destroy",
                 "responses": {
                     "200": {
-                        "description": "Usuário excluído com sucesso",
+                        "description": "",
                         "content": {
                             "application/json": {
                                 "schema": {}
@@ -266,12 +266,12 @@
                 "tags": [
                     "User"
                 ],
-                "summary": "Desconecta a conta do usuário",
-                "description": "Efetua o logout do usuário",
+                "summary": "Disconnects the user's account",
+                "description": "Logs the user out",
                 "operationId": "App\\Http\\Controllers\\API\\UserController::logout",
                 "responses": {
                     "200": {
-                        "description": "Usuário desconectado com sucesso",
+                        "description": "",
                         "content": {
                             "application/json": {
                                 "schema": {}
@@ -291,8 +291,8 @@
         "securitySchemes": {
             "apiAuth": {
                 "type": "http",
-                "description": "Login with email and password to get the authentication token",
-                "name": "Token based Based",
+                "description": "Login with email/codename and password to get the authentication token",
+                "name": "Token Based",
                 "in": "header",
                 "bearerFormat": "JWT",
                 "scheme": "bearer"
@@ -302,11 +302,11 @@
     "tags": [
         {
             "name": "User",
-            "description": "Rotas com funcionalidades do usuário"
+            "description": "Routes with user functionality"
         }
     ],
     "externalDocs": {
-        "description": "Para ver a explicação sobre o código acesse: https://youtube.com.br/thiagobruno",
+        "description": "To see the explanation of the code go to: https://youtube.com.br/thiagobruno",
         "url": "https://youtube.com.br/thiagobruno"
     }
 }

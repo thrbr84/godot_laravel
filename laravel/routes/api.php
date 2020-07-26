@@ -14,20 +14,23 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// check language
+Route::middleware('check.language')->group(function(){
 
+    // Without middleware api
+    Route::post('register', 'API\RegisterController@register');
+    Route::post('login', 'API\RegisterController@login');
+    Route::post('forgot_password', 'API\RegisterController@forgotPassword');
+    Route::put('reset_password', 'API\RegisterController@resetPassword');
 
-// Without middleware api
-Route::post('register', 'API\RegisterController@register');
-Route::post('login', 'API\RegisterController@login');
-Route::post('forgot_password', 'API\RegisterController@forgotPassword');
-Route::put('reset_password', 'API\RegisterController@resetPassword');
-
-// With middleware api
-Route::middleware('auth:api')->group(function(){
-    Route::group(['prefix'=>'user'], function() {
-        Route::get('', 'API\UserController@index');
-        Route::put('/', 'API\UserController@update');
-        Route::get('/logout', 'API\UserController@logout');
-        Route::delete('/', 'API\UserController@destroy');
+    // With middleware api
+    Route::middleware('auth:api')->group(function(){
+        Route::group(['prefix'=>'user'], function() {
+            Route::get('', 'API\UserController@index');
+            Route::put('/', 'API\UserController@update');
+            Route::get('/logout', 'API\UserController@logout');
+            Route::delete('/', 'API\UserController@destroy');
+        });
     });
+
 });

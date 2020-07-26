@@ -18,33 +18,34 @@ use App\Http\Resources\UserResource;
 /**
  *     @OA\Info(
  *         title="Godot + Laravel",
- *         description="API Rest de exemplo para ser utilizada com Godot Engine (https://godotengine.org)",
+ *         description="Sample Rest API for use with Godot Engine (https://godotengine.org)",
  *         version="1.0",
  *         @OA\Contact(
-
  *             email="thiago.bruno@birdy.studio"
  *         ),
  *         @OA\License(
  *             name="Apache 2.0",
  *             url="http://www.apache.org/licenses/LICENSE-2.0.html"
- *         )
+ *         ),
  *     ),
+
  *     @OA\Tag(
  *         name="User",
- *         description="Rotas com funcionalidades do usuário"
+ *         description="Routes with user functionality"
  *     ),
  *     @OA\ExternalDocumentation(
- *         description="Para ver a explicação sobre o código acesse: https://youtube.com.br/thiagobruno",
+ *         description="To see the explanation of the code go to: https://youtube.com.br/thiagobruno",
  *         url="https://youtube.com.br/thiagobruno"
- *     )
+ *     ),
  *
 */
 
 /**
+ *
  * @OA\SecurityScheme(
  *     type="http",
- *     description="Login with email and password to get the authentication token",
- *     name="Token based Based",
+ *     description="Login with email/codename and password to get the authentication token",
+ *     name="Token Based",
  *     in="header",
  *     scheme="bearer",
  *     bearerFormat="JWT",
@@ -58,13 +59,13 @@ class UserController extends BaseController
     /**
      * @OA\Get(
      *     tags={"User"},
-     *     summary="Retorna o usuário autenticado",
-     *     description="Retorna um usuário",
+     *     summary="Returns a user",
+     *     description="Returns the authenticated user",
      *     path="/api/user",
      *     security={{"apiAuth":{}}},
 
 
-     *     @OA\Response(response="200", description="Listando o usuário", @OA\JsonContent()),
+     *     @OA\Response(response="200", description="", @OA\JsonContent()),
      * ),
      *
     */
@@ -72,25 +73,14 @@ class UserController extends BaseController
     {
         //
         $user = new UserResource($this->auth);
-        return $this->sendResponse($request, $user, "Listando usuário atual");
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
+        return $this->sendResponse($request, $user, __("Listing current user"));
     }
 
     /**
      * @OA\Put(
      *     tags={"User"},
-     *     summary="Save do usuário",
-     *     description="Grava os dados de save do usuário",
+     *     summary="User Save",
+     *     description="Saves the user's save data",
      *     path="/api/user",
      *     security={{"apiAuth":{}}},
      *
@@ -101,7 +91,7 @@ class UserController extends BaseController
      *          )
      *     ),
 
-     *     @OA\Response(response="200", description="Usuário salvo com sucesso", @OA\JsonContent()),
+     *     @OA\Response(response="200", description="", @OA\JsonContent()),
      * ),
      *
     */
@@ -126,19 +116,19 @@ class UserController extends BaseController
 
         // return user info with save data
         $user = new UserResource($user_data);
-        return $this->sendResponse($request, $user, "Usuário atualizado com sucesso");
+        return $this->sendResponse($request, $user, __("User updated successfully"));
     }
 
     /**
      * @OA\Delete(
      *     tags={"User"},
-     *     summary="Remove a conta do usuário",
-     *     description="Exclui o usuário e o save de forma permanente",
+     *     summary="Removes user account",
+     *     description="Permanently deletes the user and save",
      *     path="/api/user",
      *     security={{"apiAuth":{}}},
 
 
-     *     @OA\Response(response="200", description="Usuário excluído com sucesso", @OA\JsonContent()),
+     *     @OA\Response(response="200", description="", @OA\JsonContent()),
      * ),
      *
     */
@@ -166,13 +156,13 @@ class UserController extends BaseController
     /**
      * @OA\Get(
      *     tags={"User"},
-     *     summary="Desconecta a conta do usuário",
-     *     description="Efetua o logout do usuário",
+     *     summary="Disconnects the user's account",
+     *     description="Logs the user out",
      *     path="/api/user/logout",
      *     security={{"apiAuth":{}}},
 
 
-     *     @OA\Response(response="200", description="Usuário desconectado com sucesso", @OA\JsonContent()),
+     *     @OA\Response(response="200", description="", @OA\JsonContent()),
      * ),
      *
     */

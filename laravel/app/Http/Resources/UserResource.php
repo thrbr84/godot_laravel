@@ -1,4 +1,7 @@
 <?php
+/**
+ * @author  Thiago Bruno <thiago.bruno@birdy.studio>
+ */
 
 namespace App\Http\Resources;
 

@@ -53,6 +53,8 @@ class Handler extends ExceptionHandler
     {
 
         $functions = new Functions();
+        $functions->checkHeaderLanguage($request);
+
         $returnCode = null;
         if ($exception instanceof \Illuminate\Validation\ValidationException)
         {

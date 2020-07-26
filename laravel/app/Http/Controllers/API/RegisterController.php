@@ -23,8 +23,8 @@ class RegisterController extends BaseController
     /**
      * @OA\Post(
      *     tags={"User"},
-     *     summary="Insere um usuário",
-     *     description="Insere um usuário na API",
+     *     summary="Register a user",
+     *     description="Register a new user",
      *     path="/api/register",
      *
      *     @OA\RequestBody(
@@ -41,7 +41,7 @@ class RegisterController extends BaseController
      *
      *     @OA\Response(
      *         response=200,
-     *         description="Usuário criado com sucesso!",
+     *         description="",
      *         @OA\JsonContent()
      *     ),
      *
@@ -67,14 +67,14 @@ class RegisterController extends BaseController
             'user' => new UserResource($user)
         ];
 
-        return $this->sendResponse($request, $success, "Usuário criado com sucesso!");
+        return $this->sendResponse($request, $success, __("User created successfully!"));
     }
 
     /**
      * @OA\Post(
      *     tags={"User"},
-     *     summary="Autentica um usuário",
-     *     description="Autentica um usuário, e retorna os dados de cadastro",
+     *     summary="Authenticate a user",
+     *     description="Authenticates a user, and returns the registration data",
      *     path="/api/login",
      *
      *     @OA\RequestBody(
@@ -88,7 +88,7 @@ class RegisterController extends BaseController
      *
      *     @OA\Response(
      *         response=200,
-     *         description="Usuário autenticado com sucesso!",
+     *         description="",
      *         @OA\JsonContent()
      *     ),
      *
@@ -109,18 +109,18 @@ class RegisterController extends BaseController
                 'user' => new UserResource($user)
             ];
 
-            return $this->sendResponse($request, $success, "Usuário autenticado com sucesso!");
+            return $this->sendResponse($request, $success, __("User authenticated successfully!"));
         }
         else{
-            return $this->sendError($request, [], "user_not_found", "Usuário não encontado!");
+            return $this->sendError($request, [], "user_not_found", __("User not found!"));
         }
     }
 
     /**
      * @OA\Post(
      *     tags={"User"},
-     *     summary="Esqueci senha",
-     *     description="Envia um código para o usuário conseguir criar nova senha",
+     *     summary="Forgot the password",
+     *     description="Send a code for the user to be able to create a new password",
      *     path="/api/forgot_password",
      *
      *     @OA\RequestBody(
@@ -130,7 +130,7 @@ class RegisterController extends BaseController
      *          )
      *     ),
 
-     *     @OA\Response(response="200", description="Código enviado por email", @OA\JsonContent()),
+     *     @OA\Response(response="200", description="", @OA\JsonContent()),
      * ),
      *
     */
@@ -143,14 +143,8 @@ class RegisterController extends BaseController
 
         if (empty($user))
         {
-            return $this->sendError($request, [], "user_not_found", "Ops! Esse e-mail não tem acesso!");
+            return $this->sendError($request, [], "user_not_found", __("User not found!"));
         }
-
-        if ($user->active === 0)
-        {
-            return $this->sendError($request, [], "user_inactive", "Ops! Esse e-mail está inativo!");
-        }
-
 
         $id = $user->id;
         $nomeCompleto = $user->full_name;
@@ -169,22 +163,22 @@ class RegisterController extends BaseController
                 $m->from(env('MAIL_USERNAME'), env('MAIL_NAME'));
                 $m
                 ->to($user->email, $user->full_name)
-                ->subject(env('MAIL_SUBJECT') . ' Criar nova senha');
+                ->subject(env('MAIL_SUBJECT') . ' ' . __("Create new password"));
             });
         }
 
 
         return $this->sendResponse($request, [
             "code" => $randomCode
-        ], "Enviamos um e-mail com um código para criar uma nova senha!");
+        ], __("We sent an email with a code to create a new password!"));
     }
 
 
     /**
      * @OA\Put(
      *     tags={"User"},
-     *     summary="Criar nova senha",
-     *     description="Cria uma nova senha com código informado anteriormente",
+     *     summary="Create new password",
+     *     description="Creates a new password with previously entered code",
      *     path="/api/reset_password",
      *
      *     @OA\RequestBody(
@@ -196,12 +190,11 @@ class RegisterController extends BaseController
      *          )
      *     ),
 
-     *     @OA\Response(response="200", description="Código enviado por email", @OA\JsonContent()),
+     *     @OA\Response(response="200", description="", @OA\JsonContent()),
      * ),
      *
     */
     public function resetPassword(Request $request){
-
 
         $req = $request->input();
 
@@ -211,21 +204,19 @@ class RegisterController extends BaseController
 
         $user = User::where("passwordNew", $code)->first();
 
-
-
         if (empty($user)){
-            return $this->sendError($request, [], "user_not_found", "User not found");
+            return $this->sendError($request, [], "user_not_found", __("User not found!"));
 
         }else{
             $passExpired = Carbon::now()->greaterThan(Carbon::createFromFormat("Y-m-d H:i:s",$user->passwordExpires));
             if ($passExpired){
-                return $this->sendError($request, [], "user_not_found", "O código utilizado não é mais válido.");
+                return $this->sendError($request, [], "user_not_found", __("The code used is no longer valid."));
             }
             if (empty($password) || empty($c_password)){
-                return $this->sendError($request, [], "user_not_found", "Preencha todos os campos");
+                return $this->sendError($request, [], "user_not_found", __("Fill in all fields"));
             }
             if ($password != $c_password){
-                return $this->sendError($request, [], "user_not_found", "As senhas precisam ser iguais");
+                return $this->sendError($request, [], "user_not_found", __("Passwords must be the same"));
             }
 
             $user->password = $password;
@@ -247,11 +238,11 @@ class RegisterController extends BaseController
                 $m->from(env('MAIL_USERNAME'), env('MAIL_NAME'));
                 $m
                     ->to($user['email'], $user['name'])
-                    ->subject(env('MAIL_SUBJECT') . ' Nova senha criada com sucesso!');
+                    ->subject(env('MAIL_SUBJECT') . ' ' . __("New password created successfully!"));
             });
         }
 
-        return $this->sendResponse($request, [], "Nova senha criada com sucesso!");
+        return $this->sendResponse($request, [], __("New password created successfully!"));
     }
 
 }
