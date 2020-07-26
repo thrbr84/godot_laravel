@@ -17,47 +17,54 @@ func _on_HTTPRequest_request_completed(result, response_code, headers, body, rou
 		
 	if res.has("status"):
 		
-		if res.status == "error":
-			var msg = res.message
-			
-			if TYPE_DICTIONARY == typeof(msg):
-				msg = ""
-				for k in res.message.keys():
-					msg = str(msg, "\n - ", res.message[k][0])
-			
-			Message._show(msg)
-			return
-		
-		if res.status == "success":
-			if route == "logout":
-				var _changeScene = get_tree().change_scene_to(load("res://scenes/login.tscn"))
-				return
+		match res.status:
+			"error":
+				var msg = res.message
 				
-			if route == "remove_account":
-				var _changeScene = get_tree().change_scene_to(load("res://scenes/login.tscn"))
-				return
-			
-			if route == "save_data":
-				Game.saving = false
-				Game.modified = false
-				Loader.close()
-				Alert._show("Save successful!", "onSaveSucessfull", null, null, { "btnConfirm" : "OK" })
-				return
+				if TYPE_DICTIONARY == typeof(msg):
+					msg = ""
+					for k in res.message.keys():
+						msg = str(msg, "\n - ", res.message[k][0])
 				
-			if route == "forgot_password":
-				Message._show(res.message)
+				Message._show(msg)
+				_destroyHttpObject(httpObject)
 				return
 			
-			if route == "reset_password":
-				Message._show(res.message)
-				return
-			
-			if route == "login" || route == "register":
-				# get token
-				Game.user_token = res['data']['token']
-				Game.user_data = res['data']['user']
-				Game.save_data = Game.user_data['save_data']
-			
+			"success":
+				match route:
+					"logout":
+						var _changeScene = get_tree().change_scene_to(load("res://scenes/login.tscn"))
+						_destroyHttpObject(httpObject)
+						return
+					
+					"remove_account":
+						var _changeScene = get_tree().change_scene_to(load("res://scenes/login.tscn"))
+						_destroyHttpObject(httpObject)
+						return
+					
+					"save_data":
+						Game.saving = false
+						Game.modified = false
+						Loader.close()
+						Alert._show("Save successful!", "onSaveSucessfull", null, null, { "btnConfirm" : "OK" })
+						_destroyHttpObject(httpObject)
+						return
+					
+					"forgot_password":
+						Message._show(res.message)
+						_destroyHttpObject(httpObject)
+						return
+					
+					"reset_password":
+						Message._show(res.message)
+						_destroyHttpObject(httpObject)
+						return
+					
+					"login", "register":
+						Game.user_token = res['data']['token']
+						Game.user_data = res['data']['user']
+						Game.save_data = Game.user_data['save_data']
+				
 	if redirectTo != null && redirectTo != "no":
 		var _changeScene = get_tree().change_scene_to(load(redirectTo))
 		
@@ -65,114 +72,49 @@ func _on_HTTPRequest_request_completed(result, response_code, headers, body, rou
 	Loader.close()
 	
 	# remove http request
-	if weakref(httpObject).get_ref():
-		httpObject.queue_free()
+	_destroyHttpObject(httpObject)
+
+func _destroyHttpObject(_object):
+	if weakref(_object).get_ref():
+		_object.queue_free()
+
+func _apiCore(_endpoint, _data, _authorize = false, _method="GET", _route = "", _redirectTo = null):
+	var http = HTTPRequest.new()
+	http.use_threads = use_threads
+	http.connect("request_completed", self, "_on_HTTPRequest_request_completed", [_route, http, _redirectTo])
+	add_child(http)
+	
+	var headers = [
+		"Content-Type: application/json",
+		"Accept: application/json",
+		str("Language: ", Game.language),
+		]
+	
+	if _authorize:
+		headers.append(str("Authorization: Bearer ", Game.user_token))
+		
+	Loader.prog = http
+	
+	var http_error = http.request(str(endpoint_api, _endpoint), headers, false, HTTPClient[str("METHOD_",_method)], to_json(_data))
+	if http_error != OK:
+		Loader.prog = null
+		Loader.close()
 
 func _login(_credentials, _redirectTo):
-	var http = HTTPRequest.new()
-	http.use_threads = use_threads
-	http.connect("request_completed", self, "_on_HTTPRequest_request_completed", ["login", http, _redirectTo])
-	add_child(http)
+	_apiCore("login", _credentials, false, "POST", "login", _redirectTo)
 	
-	var headers = [
-		"Content-Type: application/json",
-		"Accept: application/json",
-		str("Language: ", Game.language),
-		]
-	Loader.prog = http
-	
-	var http_error = http.request(str(endpoint_api, 'login'), headers, false, HTTPClient.METHOD_POST, to_json(_credentials))
-	if http_error != OK:
-		Loader.prog = null
-		Loader.close()
-
 func _register(_credentials, _redirectTo):
-	var http = HTTPRequest.new()
-	http.use_threads = use_threads
-	http.connect("request_completed", self, "_on_HTTPRequest_request_completed", ["register", http, _redirectTo])
-	add_child(http)
+	_apiCore("register", _credentials, false, "POST", "register", _redirectTo)
 	
-	var headers = [
-		"Content-Type: application/json",
-		"Accept: application/json",
-		str("Language: ", Game.language),
-		]
-	Loader.prog = http
-	var http_error = http.request(str(endpoint_api, 'register'), headers, false, HTTPClient.METHOD_POST, to_json(_credentials))
-	if http_error != OK:
-		Loader.prog = null
-		Loader.close()
-
 func _forgotPassword(_forgotData):
-	var http = HTTPRequest.new()
-	http.use_threads = use_threads
-	http.connect("request_completed", self, "_on_HTTPRequest_request_completed", ["forgot_password", http])
-	add_child(http)
-	
-	var headers = [
-		"Content-Type: application/json",
-		"Accept: application/json",
-		str("Language: ", Game.language),
-		]
-	Loader.prog = http
-	var http_error = http.request(str(endpoint_api, 'forgot_password'), headers, false, HTTPClient.METHOD_POST, to_json(_forgotData))
-	if http_error != OK:
-		Loader.prog = null
-		Loader.close()
+	_apiCore("forgot_password", _forgotData, false, "POST", "forgot_password")
 
 func _resetPassword(_resetData, _redirectTo = null):
-	var http = HTTPRequest.new()
-	http.use_threads = use_threads
-	http.connect("request_completed", self, "_on_HTTPRequest_request_completed", ["reset_password", http, _redirectTo])
-	add_child(http)
-
-	var headers = [
-		"Content-Type: application/json",
-		"Accept: application/json",
-		str("Language: ", Game.language),
-		]
-	Loader.prog = http
-	var http_error = http.request(str(endpoint_api, 'reset_password'), headers, false, HTTPClient.METHOD_PUT, to_json(_resetData))
-	if http_error != OK:
-		Loader.prog = null
-		Loader.close()
-
-func _me(_redirectTo = null):
-	var http = HTTPRequest.new()
-	http.use_threads = use_threads
-	http.connect("request_completed", self, "_on_HTTPRequest_request_completed", ["me", http, _redirectTo])
-	add_child(http)
-
-	var headers = [
-		"Content-Type: application/json",
-		"Accept: application/json",
-		str("Language: ", Game.language),
-		str("Authorization: Bearer ", Game.user_token)
-		]
-	Loader.prog = http
-	var http_error = http.request(str(endpoint_api, 'user'), headers, false, HTTPClient.METHOD_GET)
-	if http_error != OK:
-		Loader.prog = null
-		Loader.close()
+	_apiCore("reset_password", _resetData, false, "PUT", "reset_password", _redirectTo)
 
 func _logoff(simple = false):
 	if !simple:
-		var http = HTTPRequest.new()
-		http.use_threads = use_threads
-		http.connect("request_completed", self, "_on_HTTPRequest_request_completed", ["logout", http])
-		add_child(http)
-		
-		var headers = [
-			"Content-Type: application/json",
-			"Accept: application/json",
-			str("Language: ", Game.language),
-			str("Authorization: Bearer ", Game.user_token)
-			]
-		Loader.prog = http
-		var http_error = http.request(str(endpoint_api, 'user/logout'), headers, false, HTTPClient.METHOD_GET)
-		if http_error != OK:
-			Loader.prog = null
-			Loader.close()
+		_apiCore("user/logout", null, true, "GET", "logout")
 	
 	# reset variables
 	Game.user_token = null
@@ -180,47 +122,14 @@ func _logoff(simple = false):
 	Game.save_data = null
 
 func _saveGame():
-	var http = HTTPRequest.new()
-	http.use_threads = use_threads
-	http.connect("request_completed", self, "_on_HTTPRequest_request_completed", ["save_data", http])
-	add_child(http)
-	
-	var headers = [
-		"Content-Type: application/json",
-		"Accept: application/json",
-		str("Language: ", Game.language),
-		str("Authorization: Bearer ", Game.user_token)
-		]
-	
 	var game_info = {
 		"save_data": Game.save_data
 	}
-	
-	Loader.prog = http
-	var http_error = http.request(str(endpoint_api, 'user'), headers, false, HTTPClient.METHOD_PUT, to_json(game_info))
-	if http_error != OK:
-		Loader.prog = null
-		Loader.close()
+	_apiCore("user", game_info, true, "PUT", "save_data")
 
 func _removeAccount():
-	var http = HTTPRequest.new()
-	http.use_threads = use_threads
-	http.connect("request_completed", self, "_on_HTTPRequest_request_completed", ["remove_account", http])
-	add_child(http)
-	
-	var headers = [
-		"Content-Type: application/json",
-		"Accept: application/json",
-		str("Language: ", Game.language),
-		str("Authorization: Bearer ", Game.user_token)
-		]
-		
-	Loader.prog = http
-	var http_error = http.request(str(endpoint_api, 'user'), headers, false, HTTPClient.METHOD_DELETE, to_json({}))
-	if http_error != OK:
-		Loader.prog = null
-		Loader.close()
-		
+	_apiCore("user", null, true, "DELETE", "remove_account")
+
 	# reset variables
 	Game.user_token = null
 	Game.user_data = null

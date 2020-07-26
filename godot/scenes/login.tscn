@@ -7,23 +7,22 @@
 [ext_resource path="res://icon_2.png" type="Texture" id=5]
 [ext_resource path="res://assets/fonts/gill-sans.otf" type="DynamicFontData" id=7]
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=1]
 size = 60
 use_filter = true
 font_data = ExtResource( 7 )
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=2]
 size = 40
 use_filter = true
 font_data = ExtResource( 7 )
 
-[sub_resource type="DynamicFont" id=4]
+[sub_resource type="DynamicFont" id=3]
 size = 35
 use_filter = true
 font_data = ExtResource( 7 )
 
-[sub_resource type="Animation" id=1]
-resource_name = "loader"
+[sub_resource type="Animation" id=4]
 length = 2.1
 loop = true
 tracks/0/type = "value"
@@ -66,7 +65,7 @@ margin_left = 49.0
 margin_top = 348.0
 margin_right = 683.0
 margin_bottom = 443.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_constants/shadow_offset_x = 2
 custom_constants/shadow_offset_y = 2
@@ -122,9 +121,9 @@ secret = true
 placeholder_text = "Confirm password..."
 
 [node name="ControlButtons" type="Control" parent="CanvasLayer/Login/VBoxContainer"]
-margin_top = 700.0
+margin_top = 672.0
 margin_right = 620.0
-margin_bottom = 880.0
+margin_bottom = 852.0
 rect_min_size = Vector2( 0, 180 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Login/VBoxContainer/ControlButtons"]
@@ -137,8 +136,6 @@ __meta__ = {
 }
 
 [node name="btnCancel" type="Control" parent="CanvasLayer/Login/VBoxContainer/ControlButtons/HBoxContainer"]
-anchor_top = 0.184615
-anchor_bottom = 0.184615
 margin_left = 32.0
 margin_right = 302.0
 margin_bottom = 130.0
@@ -152,7 +149,7 @@ normal = ExtResource( 4 )
 [node name="Label" type="Label" parent="CanvasLayer/Login/VBoxContainer/ControlButtons/HBoxContainer/btnCancel"]
 margin_right = 261.0
 margin_bottom = 94.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0.65098, 0.65098, 0.65098, 1 )
 text = "Cancel"
 align = 1
@@ -163,8 +160,6 @@ __meta__ = {
 }
 
 [node name="btnConfirm" type="Control" parent="CanvasLayer/Login/VBoxContainer/ControlButtons/HBoxContainer"]
-anchor_top = 0.184615
-anchor_bottom = 0.184615
 margin_left = 317.0
 margin_right = 587.0
 margin_bottom = 130.0
@@ -178,7 +173,7 @@ normal = ExtResource( 4 )
 [node name="Label" type="Label" parent="CanvasLayer/Login/VBoxContainer/ControlButtons/HBoxContainer/btnConfirm"]
 margin_right = 261.0
 margin_bottom = 94.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0.65098, 0.65098, 0.65098, 1 )
 text = "Entrar"
 align = 1
@@ -213,7 +208,7 @@ rect_min_size = Vector2( 280, 0 )
 [node name="Label" type="Label" parent="CanvasLayer/Login/VBoxContainer/ControlLinks/HBoxContainer/linkForgotPassword"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 0.596078, 0.596078, 0.596078, 1 )
 custom_constants/shadow_offset_x = 2
 custom_constants/shadow_offset_y = 2
@@ -241,7 +236,7 @@ rect_min_size = Vector2( 20, 0 )
 margin_top = 52.0
 margin_right = 1.0
 margin_bottom = 113.0
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 0.596078, 0.596078, 0.596078, 1 )
 custom_constants/shadow_offset_x = 2
 custom_constants/shadow_offset_y = 2
@@ -260,7 +255,7 @@ rect_min_size = Vector2( 280, 0 )
 [node name="Label" type="Label" parent="CanvasLayer/Login/VBoxContainer/ControlLinks/HBoxContainer/linkNewUser"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 0.596078, 0.596078, 0.596078, 1 )
 custom_constants/shadow_offset_x = 2
 custom_constants/shadow_offset_y = 2
@@ -287,7 +282,7 @@ hframes = 23
 [node name="anim" type="AnimationPlayer" parent="CanvasLayer/loader"]
 autoplay = "loader"
 playback_speed = 1.5
-anims/loader = SubResource( 1 )
+anims/loader = SubResource( 4 )
 
 [node name="Header" type="ColorRect" parent="CanvasLayer"]
 margin_right = 720.0
