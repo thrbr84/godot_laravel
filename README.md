@@ -13,6 +13,7 @@
     - chmod -R 0777 bootstrap/cache
     - php artisan key:generate
     - create mysql database ```godot_laravel```
+    - copy .env.model .env
     - config the ```.env``` file with your parameters
     - php artisan migrate
     - php artisan passport:install
