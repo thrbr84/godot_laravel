@@ -14,8 +14,8 @@
 - cd godot_laravel/laravel
 - Execute:
     - composer install
-    - chmod -R 0777 storage
-    - chmod -R 0777 bootstrap/cache
+    - chmod -R 0755 storage
+    - chmod -R 0755 bootstrap/cache
     - cp .env.model .env
     - php artisan key:generate
     - create mysql database ```godot_laravel```
