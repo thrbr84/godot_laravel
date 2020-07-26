@@ -85,11 +85,11 @@
                 </div>
 
                 <div class="links">
-                    <a href="/api/documentation">Godot + Laravel API Reference</a>
-                    <a href="https://laravel.com/docs">Laravel Docs</a>
-                    <a href="https://youtube.com.br/thiagobruno">Thiago Bruno Channel</a>
-                    <a href="https://github/thiagobruno">Thiago Bruno GitHub</a>
-                    <a href="https://picpay.me/thiagobrun0">Sponsorships</a>
+                    <a href="/api/documentation" target="_blank">Godot + Laravel API Reference</a>
+                    <a href="https://laravel.com/docs" target="_blank">Laravel Docs</a>
+                    <a href="https://youtube.com.br/thiagobruno" target="_blank">Thiago Bruno Channel</a>
+                    <a href="https://github.com/thiagobruno" target="_blank">Thiago Bruno GitHub</a>
+                    <a href="https://picpay.me/thiagobrun0" target="_blank">Sponsorships</a>
                 </div>
             </div>
         </div>
