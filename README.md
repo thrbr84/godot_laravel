@@ -11,7 +11,10 @@
 - Install [docker-compose](https://docs.docker.com/compose/install/)
 - Execute: ```docker-compose up```
 - After run the docker: http://localhost
-- Change the endpoint in ```Godot/Scripts/HttpLayer.gd```: -> ```http://localhost/api```
+- Change the endpoint in ```Godot/Scripts/HttpLayer.gd```:
+    ```bash
+    var endpoint_api = "http://localhost/api/"
+    ```
 
 # Running without Docker
 - [Dependencies](DEPENDENCIES.md)
