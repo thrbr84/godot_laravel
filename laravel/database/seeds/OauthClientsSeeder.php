@@ -19,7 +19,7 @@ class OauthClientsSeeder extends Seeder
                 'id' => 1,
                 'user_id' => 1,
                 'name' => 'GodotLaravel (Client)',
-                'secret' => 'yTyqxWAmEHlnKOxtscXIXQAzAj5vxKKpHIBgOH4I',
+                'secret' => str_random(40),
                 'redirect' => 'http://localhost',
                 'personal_access_client' => 0,
                 'password_client' => 1,

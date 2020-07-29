@@ -5,7 +5,7 @@
 
 [![Video explanation](https://img.youtube.com/vi/eSmhLndmim4/0.jpg)](https://www.youtube.com/watch?v=eSmhLndmim4)
 
-# Setting with Docker
+# Running with Docker
 ### [Contributed by @felippe-miguel](https://github.com/felippe-miguel)
 - Install [docker](https://docs.docker.com/engine/install/ubuntu/)
 - Install [docker-compose](https://docs.docker.com/compose/install/)
