@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Faker\Factory as Faker;
 use Carbon\Carbon;
 
 class OauthClientsSeeder extends Seeder
@@ -12,6 +13,7 @@ class OauthClientsSeeder extends Seeder
      */
     public function run()
     {
+        $faker = Faker::create();
 
         // Permite criação de token via login / usuario e senha
         DB::table('oauth_clients')->insert([
@@ -19,7 +21,7 @@ class OauthClientsSeeder extends Seeder
                 'id' => 1,
                 'user_id' => 1,
                 'name' => 'GodotLaravel (Client)',
-                'secret' => str_random(40),
+                'secret' => $faker->regexify('[A-Za-z0-9]{40}'),
                 'redirect' => 'http://localhost',
                 'personal_access_client' => 0,
                 'password_client' => 1,
