@@ -1,7 +1,10 @@
 #!/bin/bash
 
-echo "==> Running migration"
-php artisan migrate
+echo "==> Running migration:reset"
+php artisan migrate:reset
+
+echo "==> Running migration --seed"
+php artisan migrate --seed
 
 echo "==> Running passport installation"
 php artisan passport:install

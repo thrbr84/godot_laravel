@@ -49,7 +49,7 @@ class UserRequest extends FormRequest
             'password.required' => __('Please create a password'),
             'password.min' => __('The password entered is too short, it must be at least: min characters.'),
             'c_password.required' => __('Please repeat the created password'),
-            'c_password.same' => _('This password must be the same as the one created'),
+            'c_password.same' => __('This password must be the same as the one created'),
         ];
     }
 }

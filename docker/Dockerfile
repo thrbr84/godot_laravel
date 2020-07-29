@@ -13,6 +13,8 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 ADD apache/000-default.conf /etc/apache2/sites-available/000-default.conf
 
+ADD etc/hosts /etc/hosts_extra
+
 ADD first.sh /first.sh
 ADD wait-for-it.sh /wait-for-it.sh
 ADD second.sh /second.sh
@@ -26,3 +28,5 @@ RUN a2enmod rewrite
 WORKDIR /var/www/html
 
 CMD /first.sh && /wait-for-it.sh $DB_HOST:$DB_PORT && /second.sh
+
+CMD cat /etc/hosts_extra >> etc/hosts;
