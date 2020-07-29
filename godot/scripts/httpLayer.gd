@@ -13,7 +13,8 @@ func _on_HTTPRequest_request_completed(result, response_code, headers, body, rou
 	emit_signal("http_completed", res, response_code, headers, route)
 
 	if res == null:
-		res = {}
+		Message._show("API is not running")
+		return
 		
 	if res.has("status"):
 		

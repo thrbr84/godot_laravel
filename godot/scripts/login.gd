@@ -143,6 +143,7 @@ func _on_btnConfirm_pressed() -> void:
 	$CanvasLayer/loader.show()
 
 func http_completed(res, response_code, headers, route) -> void:
+	if res == null : return
 	if res.status == "success" && route == "reset_password":
 		btnLoginAction("login")
 

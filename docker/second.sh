@@ -1,13 +1,10 @@
 #!/bin/bash
 
-echo "==> Running migration:reset"
-php artisan migrate:reset
+echo "==> Running migration:restart"
+php artisan migrate:restart
 
 echo "==> Running migration --seed"
 php artisan migrate --seed
-
-echo "==> Running passport installation"
-php artisan passport:install
 
 echo "==> Config cache"
 php artisan config:cache
