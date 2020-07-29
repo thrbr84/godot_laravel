@@ -1,7 +1,7 @@
 #!/bin/bash
 
-echo "==> Running migration:restart"
-php artisan migrate:restart
+echo "==> Running migration:reset"
+php artisan migrate:reset
 
 echo "==> Running migration --seed"
 php artisan migrate --seed
