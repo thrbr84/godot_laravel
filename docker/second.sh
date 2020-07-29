@@ -1,5 +1,8 @@
 #!/bin/bash
 
+echo "==> Passport install keys"
+php artisan passport:keys
+
 echo "==> Running migration:reset"
 php artisan migrate:reset
 

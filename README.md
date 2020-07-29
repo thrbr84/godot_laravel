@@ -28,6 +28,7 @@
     - php artisan key:generate
     - create mysql database ```godot_laravel```
     - config the ```.env``` file with your parameters
+    - php artisan passport:keys
     - php artisan migrate --seed
 
     ## Optimize
