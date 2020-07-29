@@ -9,8 +9,9 @@
 ### [Contributed by @felippe-miguel](https://github.com/felippe-miguel)
 - Install [docker](https://docs.docker.com/engine/install/ubuntu/)
 - Install [docker-compose](https://docs.docker.com/compose/install/)
-- execute: ```docker-compose up```
-- after run the docker: http://godotlaravel.local
+- Execute: ```docker-compose up```
+- After run the docker: http://localhost
+- Change the endpoint in ```Godot/Scripts/HttpLayer.gd```: -> ```http://localhost/api```
 
 # Running without Docker
 - [Dependencies](DEPENDENCIES.md)
